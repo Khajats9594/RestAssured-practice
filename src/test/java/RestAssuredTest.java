@@ -1,19 +1,26 @@
+import enums.LogType;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import org.testng.ITestContext;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import report.ExtentReport;
 import user.CreateUserClient;
 import user.createUserRequestBody;
 import user.createUserResponseBody;
 
+import java.lang.reflect.Method;
+
 import static org.testng.Assert.*;
+import static report.FrameworkLogger.log;
 
 public class RestAssuredTest {
 
+
     @Test(priority = 1)
     public void shouldCreateUser(ITestContext context){
-
         //Arrange
         createUserRequestBody requestBody = createUserRequestBody.builder()
                 .name("Jon")
@@ -23,6 +30,7 @@ public class RestAssuredTest {
                 .mobile("9876543210")
                 .nationality("USA")
                 .build();
+        //log(LogType.LOGJSON,requestBody.toString());
 
         //Act
         createUserResponseBody responseBody = new CreateUserClient().createUser(requestBody);
@@ -58,6 +66,7 @@ public class RestAssuredTest {
                 .mobile("9876543210")
                 .nationality("India")
                 .build();
+        //log(LogType.LOGJSON,requestBody.toString());
 
         //Act
         createUserResponseBody responseBody = new CreateUserClient().updateUser(requestBody,id);

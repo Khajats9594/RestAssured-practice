@@ -1,6 +1,7 @@
 package report;
 
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
@@ -10,10 +11,7 @@ import java.util.Objects;
 public class ExtentReport {
     private ExtentReport() {
     }
-
     private static ExtentReports extent;
-
-
     public static void initReports() {
         if (Objects.isNull(extent)) {
             extent = new ExtentReports();
@@ -38,7 +36,8 @@ public class ExtentReport {
     }
 
     public static void createTest(String testcase) {
-        ExtentManager.setExtentTest(extent.createTest(testcase));
+        ExtentTest extentTest = extent.createTest(testcase);
+        ExtentManager.setExtentTest(extentTest);
     }
 
 

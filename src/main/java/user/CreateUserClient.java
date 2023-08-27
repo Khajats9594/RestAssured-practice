@@ -1,8 +1,12 @@
 package user;
 
+import enums.LogType;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
+import report.FrameworkLogger;
+
+import static report.FrameworkLogger.*;
 
 public class CreateUserClient {
 
@@ -12,7 +16,8 @@ public class CreateUserClient {
                 .body(requestBody)
                 .post("http://localhost:9292/user/signup");
 
-        response.prettyPrint();
+        //log(LogType.LOGJSON,response.prettyPrint());
+
         createUserResponseBody createUserResponseBody = response.as(createUserResponseBody.class);
 
         return createUserResponseBody;
@@ -23,7 +28,7 @@ public class CreateUserClient {
                 .header("Content-Type", "application/json")
                 .get("http://localhost:9292/user/"+id);
 
-        response.prettyPrint();
+        //log(LogType.LOGJSON,response.prettyPrint());
 
         createUserResponseBody createUserResponseBody = response.as(createUserResponseBody.class);
 
@@ -35,7 +40,8 @@ public class CreateUserClient {
                 .header("Content-Type", "application/json")
                 .body(requestBody)
                 .put("http://localhost:9292/user/update/"+id);
-        response.prettyPrint();
+
+        //log(LogType.LOGJSON,response.prettyPrint());
 
         createUserResponseBody createUserResponseBody = response.as(createUserResponseBody.class);
 
@@ -48,7 +54,7 @@ public class CreateUserClient {
                 .delete("http://localhost:9292/user/delete/"+id);
 
         ResponseBody message = response.body();
-        System.out.println(message.asString());
+        //log(LogType.PASS,response.body().asString());
 
         return message;
     }
