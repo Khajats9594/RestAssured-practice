@@ -1,9 +1,11 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import pojos.createRequestUser;
-import pojos.createResponseUser;
+import user.CreateUserClient;
+import user.createUserRequestBody;
+import user.createUserResponseBody;
+
+import static org.testng.Assert.*;
 
 public class RestAssuredTest {
 
@@ -11,7 +13,7 @@ public class RestAssuredTest {
     public void shouldCreateUser(){
 
         //Arrange
-        createRequestUser user = createRequestUser.builder()
+        createUserRequestBody requestBody = createUserRequestBody.builder()
                 .name("Jon")
                 .email("jon@gmail.com")
                 .age(27)
@@ -21,18 +23,12 @@ public class RestAssuredTest {
                 .build();
 
         //Act
-        Response response = RestAssured.given()
-                .header("Content-Type", "application/json")
-                .body(user)
-                .post("http://localhost:9292/user/signup");
-
-        response.prettyPrint();
-
-        createResponseUser createResponseUser = response.as(createResponseUser.class);
+        createUserResponseBody responseBody = new CreateUserClient().createUser(requestBody);
 
         //Assert
-        Assert.assertNotNull(createResponseUser.getUserId());
-        Assert.assertEquals(createResponseUser.getName(), user.getName());
+        assertNotNull(responseBody.getUserId());
+        assertEquals(responseBody.getName(), requestBody.getName());
+
 
     }
 }

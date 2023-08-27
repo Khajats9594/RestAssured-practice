@@ -1,9 +1,9 @@
-package pojos;
+package user;
 
 import lombok.Getter;
 
 @Getter
-public class createResponseUser {
+public class createUserResponseBody {
 
     private Integer userId;
     private String name;
