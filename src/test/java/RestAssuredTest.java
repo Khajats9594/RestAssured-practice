@@ -7,7 +7,6 @@ import user.createUserResponseBody;
 import static org.testng.Assert.*;
 public class RestAssuredTest {
 
-
     @Test(priority = 1)
     public void shouldCreateUser(ITestContext context){
         //Arrange
@@ -76,4 +75,5 @@ public class RestAssuredTest {
         //Assert
         assertEquals(responseBody.asString(),"User with ID " + id + " has been successfully deleted.");
     }
+
 }
