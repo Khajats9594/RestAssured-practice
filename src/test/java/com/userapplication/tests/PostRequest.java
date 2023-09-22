@@ -1,3 +1,5 @@
+package com.userapplication.tests;
+
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 import user.CreateUserClient;

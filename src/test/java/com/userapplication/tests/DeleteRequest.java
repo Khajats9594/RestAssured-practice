@@ -1,3 +1,5 @@
+package com.userapplication.tests;
+
 import io.restassured.response.ResponseBody;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
